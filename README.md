@@ -22,6 +22,22 @@ In your `composer.json`, add this repository:
 ```
 Then do `composer require tenantcloud/guzzle-helpers` to install the package.
 
+## Examples
+		$stack = \GuzzleHttp\HandlerStack::create();
+
+		// Return all response body.
+		$stack->unshift(\TenantCloud\GuzzleHelper\GuzzleMiddleware\GuzzleMiddleware::fullErrorResponseBody());
+
+		// Hide secret info from error responses (cut contactEmail, contactPhone keys).
+		// Hide Authorization header
+		$stack->unshift(\TenantCloud\GuzzleHelper\GuzzleMiddleware\GuzzleMiddleware::dumpRequestBody([
+			new \TenantCloud\GuzzleHelper\GuzzleMiddleware\JsonObfuscator([
+				'contactEmail',
+				'contactPhone',
+			]),
+			new \TenantCloud\GuzzleHelper\GuzzleMiddleware\HeaderObfuscator(['Authorization']),
+		]));
+
 ### Commands
 Install dependencies:
 `docker run -it --rm -v $PWD:/app -w /app composer install`
