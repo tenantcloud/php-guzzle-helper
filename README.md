@@ -1,6 +1,13 @@
 # Guzzle helpers
 
-Guzzle helpers.
+Guzzle helpers. Add Header and Json obfuscators for guzzle middleware.
+Used for remove autorization headers and sensitive date from response logs.
+
+## Requirements
+
+* Guzzle >=7
+* PHP version >=7.4.1
+* Docker (optional)
 
 ## Installation
 
