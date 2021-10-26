@@ -2,7 +2,7 @@ includes:
 	- tools/phpstan/vendor/phpstan/phpstan/conf/bleedingEdge.neon
 
 parameters:
-	level: 1
+	level: 5
 	tmpDir: ./tmp/phpstan
 
 	paths:
