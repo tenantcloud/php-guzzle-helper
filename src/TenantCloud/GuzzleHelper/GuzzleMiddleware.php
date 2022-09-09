@@ -4,14 +4,18 @@ namespace TenantCloud\GuzzleHelper;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use TenantCloud\GuzzleHelper\DumpRequestBody\RequestObfuscator;
 use Tests\GuzzleDumpRequestBodyMiddlewareTest;
 use Tests\GuzzleFullErrorResponseBodyMiddlewareTest;
 use Tests\GuzzleRethrowExceptionMiddlewareTest;
+use Tests\GuzzleTracingLogMiddlewareTest;
 use Throwable;
 
 /**
@@ -97,5 +101,15 @@ class GuzzleMiddleware
 
 			throw new RequestException($message, $e->getRequest(), $e->getResponse(), $e->getPrevious() instanceof Exception ? $e->getPrevious() : null, $e->getHandlerContext());
 		});
+	}
+
+	/**
+	 * Logs all HTTP requests with minimum information - no body, no response, no headers.
+	 *
+	 * @see GuzzleTracingLogMiddlewareTest
+	 */
+	public static function tracingLog(LoggerInterface $logger, string $level = 'debug'): callable
+	{
+		return Middleware::log($logger, new MessageFormatter('{method} {uri} {req_header_content-length} -> {code}'), $level);
 	}
 }
