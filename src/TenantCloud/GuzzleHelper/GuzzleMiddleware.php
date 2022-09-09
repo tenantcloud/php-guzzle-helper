@@ -11,6 +11,7 @@ use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use TenantCloud\GuzzleHelper\DumpRequestBody\RequestObfuscator;
 use Tests\GuzzleDumpRequestBodyMiddlewareTest;
 use Tests\GuzzleFullErrorResponseBodyMiddlewareTest;
@@ -107,6 +108,8 @@ class GuzzleMiddleware
 	 * Logs all HTTP requests with minimum information - no body, no response, no headers.
 	 *
 	 * @see GuzzleTracingLogMiddlewareTest
+	 *
+	 * @param LogLevel::* $level
 	 */
 	public static function tracingLog(LoggerInterface $logger, string $level = 'debug'): callable
 	{
