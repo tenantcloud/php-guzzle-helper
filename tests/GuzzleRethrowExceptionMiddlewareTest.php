@@ -22,8 +22,7 @@ class GuzzleRethrowExceptionMiddlewareTest extends TestCase
 	public function testNotCalledWithoutAnException(): void
 	{
 		$this
-			->newClientWithMiddleware(static function () {
-			}, function (Throwable $e) {
+			->newClientWithMiddleware(static function () {}, function (Throwable $e) {
 				$this->assertFalse(true);
 			})
 			->get('');
@@ -72,8 +71,7 @@ class GuzzleRethrowExceptionMiddlewareTest extends TestCase
 		$this->expectExceptionMessage('Test test');
 
 		$this
-			->newClientWithMiddleware(static function (RequestInterface $request) {
-			}, function (Throwable $e) {
+			->newClientWithMiddleware(static function (RequestInterface $request) {}, function (Throwable $e) {
 				$this->assertInstanceOf(RequestException::class, $e);
 
 				throw new LogicException('Test test');

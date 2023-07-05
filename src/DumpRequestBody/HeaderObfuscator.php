@@ -20,9 +20,6 @@ class HeaderObfuscator implements RequestObfuscator
 		$this->headers = $headers;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function obfuscate(RequestInterface $request): RequestInterface
 	{
 		foreach ($this->headers as $header) {
