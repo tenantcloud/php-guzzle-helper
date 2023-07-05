@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\HandlerStack;
-use function GuzzleHttp\Promise\rejection_for;
+use GuzzleHttp\Promise\Create;
 use GuzzleHttp\Psr7\Response;
 use Orchestra\Testbench\TestCase;
 use Psr\Http\Message\RequestInterface;
@@ -100,14 +100,14 @@ class GuzzleDumpRequestBodyMiddlewareTest extends TestCase
 
 		$this
 			->newClientWithMiddleware([
-				new class() implements RequestObfuscator {
+				new class () implements RequestObfuscator {
 					public function obfuscate(RequestInterface $request): RequestInterface
 					{
 						return $request->withHeader('New-Header1', 'zal')
 							->withHeader('New-Header2', 'upa');
 					}
 				},
-				new class() implements RequestObfuscator {
+				new class () implements RequestObfuscator {
 					public function obfuscate(RequestInterface $request): RequestInterface
 					{
 						return $request->withoutHeader('New-Header1');
@@ -130,7 +130,7 @@ class GuzzleDumpRequestBodyMiddlewareTest extends TestCase
 			$getOriginalException = fn (RequestInterface $request) => RequestException::create($request);
 		}
 
-		$stack = HandlerStack::create(static fn (RequestInterface $request) => rejection_for($getOriginalException($request)));
+		$stack = HandlerStack::create(static fn (RequestInterface $request) => Create::rejectionFor($getOriginalException($request)));
 
 		$stack->unshift(GuzzleMiddleware::dumpRequestBody($obfuscators));
 

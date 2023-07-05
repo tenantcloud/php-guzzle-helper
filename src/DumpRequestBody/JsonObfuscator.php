@@ -5,8 +5,9 @@ namespace TenantCloud\GuzzleHelper\DumpRequestBody;
 use GuzzleHttp\Psr7\Utils;
 use JsonException;
 use Psr\Http\Message\RequestInterface;
-use function TenantCloud\GuzzleHelper\arr_replace;
 use Tests\DumpRequestBody\JsonObfuscatorTest;
+
+use function TenantCloud\GuzzleHelper\arr_replace;
 
 /**
  * Obfuscates JSON body's fields.
@@ -28,9 +29,6 @@ class JsonObfuscator implements RequestObfuscator
 		$this->fields = $fields;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function obfuscate(RequestInterface $request): RequestInterface
 	{
 		$body = (string) $request->getBody();

@@ -4,6 +4,7 @@ namespace Tests;
 
 use GuzzleHttp\Psr7\Response;
 use Orchestra\Testbench\TestCase;
+
 use function TenantCloud\GuzzleHelper\psr_response_to_json;
 
 /**
