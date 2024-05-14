@@ -124,7 +124,7 @@ class GuzzleDumpRequestBodyMiddlewareTest extends TestCase
 	/**
 	 * Create new Guzzle client with the middleware.
 	 */
-	private function newClientWithMiddleware(array $obfuscators = [], callable $getOriginalException = null): Client
+	private function newClientWithMiddleware(array $obfuscators = [], ?callable $getOriginalException = null): Client
 	{
 		if (!$getOriginalException) {
 			$getOriginalException = fn (RequestInterface $request) => RequestException::create($request);

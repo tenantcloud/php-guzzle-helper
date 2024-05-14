@@ -16,18 +16,12 @@ use function TenantCloud\GuzzleHelper\arr_replace;
  */
 class JsonObfuscator implements RequestObfuscator
 {
-	/** @var string[] */
-	private array
-
- $fields;
-
 	/**
-	 * @param string[] $fields
+	 * @param list<string> $fields
 	 */
-	public function __construct(array $fields = [])
-	{
-		$this->fields = $fields;
-	}
+	public function __construct(/** @var list<string> */
+		private array $fields = []
+	) {}
 
 	public function obfuscate(RequestInterface $request): RequestInterface
 	{
