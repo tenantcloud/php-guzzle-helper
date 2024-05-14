@@ -4,6 +4,7 @@ namespace TenantCloud\GuzzleHelper;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Create;
@@ -25,7 +26,7 @@ use Throwable;
 class GuzzleMiddleware
 {
 	/**
-	 * Middleware for Guzzle's {@see \GuzzleHttp\HandlerStack} to catch
+	 * Middleware for Guzzle's {@see HandlerStack} to catch
 	 * an exception and rethrow it.
 	 *
 	 * @see GuzzleRethrowExceptionMiddlewareTest
@@ -78,7 +79,7 @@ class GuzzleMiddleware
 	 *
 	 * Optionally, can use obfuscators to hide sensitive information before dumping.
 	 *
-	 * @param RequestObfuscator|RequestObfuscator[] $obfuscators
+	 * @param RequestObfuscator|list<RequestObfuscator> $obfuscators
 	 *
 	 * @see GuzzleDumpRequestBodyMiddlewareTest
 	 */

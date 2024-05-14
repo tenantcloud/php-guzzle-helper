@@ -91,7 +91,7 @@ class GuzzleRethrowExceptionMiddlewareTest extends TestCase
 	/**
 	 * Create new Guzzle client with the middleware.
 	 */
-	private function newClientWithMiddleware(callable $handleRequest, callable $handleException, callable $modifyHandler = null): Client
+	private function newClientWithMiddleware(callable $handleRequest, callable $handleException, ?callable $modifyHandler = null): Client
 	{
 		$stack = HandlerStack::create(static function (RequestInterface $request, array $options) use ($handleRequest) {
 			try {

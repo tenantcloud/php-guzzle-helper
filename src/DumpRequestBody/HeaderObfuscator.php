@@ -9,16 +9,12 @@ use Psr\Http\Message\RequestInterface;
  */
 class HeaderObfuscator implements RequestObfuscator
 {
-	/** @var string[] */
-	private array $headers;
-
 	/**
-	 * @param string[] $headers
+	 * @param list<string> $headers
 	 */
-	public function __construct(array $headers = [])
-	{
-		$this->headers = $headers;
-	}
+	public function __construct(/** @var list<string> */
+		private array $headers = []
+	) {}
 
 	public function obfuscate(RequestInterface $request): RequestInterface
 	{
