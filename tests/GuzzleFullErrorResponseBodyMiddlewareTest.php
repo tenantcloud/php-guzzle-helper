@@ -46,12 +46,10 @@ class GuzzleFullErrorResponseBodyMiddlewareTest extends TestCase
 		$this->expectExceptionMessage("Unsuccessful request: `GET ` resulted in a `200 OK` response:\n{$responseBody}");
 
 		$this
-			->newClientWithMiddleware(static function (RequestInterface $request) use ($responseBody) {
-				return RequestException::create(
-					$request,
-					new Response(200, [], $responseBody)
-				);
-			})
+			->newClientWithMiddleware(static fn (RequestInterface $request) => RequestException::create(
+				$request,
+				new Response(200, [], $responseBody)
+			))
 			->get('');
 	}
 
