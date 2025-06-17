@@ -6,7 +6,7 @@ Used for remove autorization headers and sensitive date from response logs.
 ## Requirements
 
 -   Guzzle >=7
--   PHP version >=7.4.1
+-   PHP version >=8.2
 -   Docker (optional)
 
 ## Installation

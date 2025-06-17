@@ -13,11 +13,12 @@ on:
 
 jobs:
     phpunit:
-        name: PHPUnit on PHP v${{ matrix.php }}
+        name: PHPUnit on PHP v${{ matrix.php }} & TestBench ${{ matrix.test-bench }}
         strategy:
             fail-fast: true
             matrix:
                 php: [8.2, 8.3]
+                test-bench: [^8.0, ^9.0]
 
         runs-on: packages
         container: chialab/php:${{ matrix.php }}
@@ -32,7 +33,9 @@ jobs:
                   key: composer-${{ hashFiles('composer.json') }}
 
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress
+              run: |
+                  composer require "orchestra/testbench=${{ matrix.test-bench }}" --dev --no-update
+                  composer install --prefer-dist --no-progress
 
             - name: Execute phpunit
               run: composer test -- --colors=always
@@ -72,11 +75,12 @@ jobs:
                   args: --check .
 
     phpstan:
-        name: PHPStan on PHP v${{ matrix.php }}
+        name: PHPStan on PHP v${{ matrix.php }} & TestBench ${{ matrix.test-bench }}
         strategy:
             fail-fast: true
             matrix:
                 php: [8.2, 8.3]
+                test-bench: [^8.0, ^9.0]
 
         runs-on: packages
         container: chialab/php:${{ matrix.php }}
@@ -91,7 +95,9 @@ jobs:
                   key: composer-${{ hashFiles('composer.json') }}
 
             - name: Install dependencies
-              run: composer install --prefer-dist --no-progress
+              run: |
+                  composer require "orchestra/testbench=${{ matrix.test-bench }}" --dev --no-update
+                  composer install --prefer-dist --no-progress
 
             - name: Execute phpstan
               run: composer phpstan
