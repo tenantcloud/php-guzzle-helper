@@ -6,11 +6,11 @@
 		"php": ">=8.2",
 		"ext-json": "*",
 		"guzzlehttp/guzzle": "~7.2",
-		"illuminate/support": "^9.0 || ^10.0 || ^11.0",
+		"illuminate/support": "^10.0 || ^11.0",
 		"spatie/macroable": "1.0.1"
 	},
 	"require-dev": {
-		"orchestra/testbench": "^7.0 || ^8.5 || ^9.0",
+		"orchestra/testbench": "^8.5 || ^9.0",
 		"pestphp/pest": "^2.8",
 		"php-cs-fixer/shim": "^3.54",
 		"tenantcloud/php-cs-fixer-rule-sets": "~3.3.1",
